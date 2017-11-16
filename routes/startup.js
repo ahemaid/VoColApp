@@ -117,10 +117,14 @@ router.get('/', function(req, res) {
           var output = shell.exec('ttl ' + files[i] + '', {
             silent: true
           })
-          // converting file from turtle to ntriples format
+          //converting file from turtle to ntriples format
           shell.exec('rapper -i turtle -o ntriples ' + files[i] + ' >> ../VoColApp/helper/tools/serializations/SingleVoc.nt', {
             silent: false
           }).stdout;
+          // shell.exec('java -jar  ../VoColApp/helper/tools/rdf2rdf/rdf2rdf-1.0.1-2.3.1.jar ' + files[i] + ' >> ../VoColApp/helper/tools/serializations/SingleVoc.nt', {
+          //    silent: false
+          //  }).stdout;
+          //
           // check if there are syntax errors of turtle format
           if (!output.stdout.includes("0 errors.")) {
             errors += "<h3>Error in file " + files[i] + "</h3><h4>" + output.split('\n')[0] + "</h4><br/>";
